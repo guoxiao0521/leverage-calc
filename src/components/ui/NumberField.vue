@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<{
   suffix?: string
   placeholder?: string
   step?: number
+  precision?: number
   min?: number
   class?: string
   inputClass?: string
@@ -19,13 +20,19 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{ 'update:modelValue': [number | null] }>()
 
-const text = ref(props.modelValue === null ? '' : String(props.modelValue))
+function formatValue(value: number | null) {
+  if (value === null)
+    return ''
+  return props.precision === undefined ? String(value) : value.toFixed(props.precision)
+}
+
+const text = ref(formatValue(props.modelValue))
 
 watch(() => props.modelValue, (next) => {
   const parsed = text.value.trim() === '' ? null : Number(text.value)
   // 只有外部值和当前输入框真的不一致时才回写，否则会打断用户输入
   if (next !== parsed)
-    text.value = next === null ? '' : String(next)
+    text.value = formatValue(next)
 })
 
 function onInput(event: Event) {
@@ -39,6 +46,15 @@ function onInput(event: Event) {
   const parsed = Number(trimmed)
   if (Number.isFinite(parsed))
     emit('update:modelValue', parsed)
+}
+
+function onBlur() {
+  const trimmed = text.value.trim()
+  if (trimmed === '' || props.precision === undefined)
+    return
+  const parsed = Number(trimmed)
+  if (Number.isFinite(parsed))
+    text.value = parsed.toFixed(props.precision)
 }
 </script>
 
@@ -62,6 +78,7 @@ function onInput(event: Event) {
           props.inputClass,
         )"
         @input="onInput"
+        @blur="onBlur"
       >
       <span v-if="suffix" class="text-muted-foreground pointer-events-none absolute right-2.5 text-xs">
         {{ suffix }}

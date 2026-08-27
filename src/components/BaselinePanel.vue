@@ -63,7 +63,7 @@ const leverageValue = computed({
           <Badge variant="muted">正股</Badge>
           <Badge v-if="overrideBase !== null" variant="warn">已覆盖</Badge>
         </div>
-        <NumberField v-model="baseValue" :step="0.01" placeholder="等待行情…" />
+        <NumberField v-model="baseValue" :step="0.01" :precision="2" placeholder="等待行情…" />
         <div class="text-muted-foreground flex h-4 items-center gap-1.5 text-[11px]">
           <template v-if="overrideBase !== null">
             <span>实时 {{ formatPrice(livePrice) }}</span>
@@ -85,7 +85,7 @@ const leverageValue = computed({
           <Badge variant="muted">杠杆</Badge>
           <Badge v-if="overrideLeveraged !== null" variant="warn">已覆盖</Badge>
         </div>
-        <NumberField v-model="leveragedValue" :step="0.01" placeholder="等待行情…" />
+        <NumberField v-model="leveragedValue" :step="0.01" :precision="2" placeholder="等待行情…" />
         <div class="text-muted-foreground flex h-4 items-center gap-1.5 text-[11px]">
           <template v-if="overrideLeveraged !== null">
             <span>实时 {{ formatPrice(liveLeveraged) }}</span>
