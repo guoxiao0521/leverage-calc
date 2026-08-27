@@ -1,0 +1,40 @@
+{
+  "name": "leverage-calc",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "美股正股 ↔ 杠杆 ETP 价位换算桌面工具",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "vue-tsc --noEmit",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.18.0",
+    "@tauri-apps/api": "^2.9.0",
+    "@tauri-apps/plugin-store": "^2.4.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0",
+    "vue": "^3.5.35"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@tauri-apps/cli": "^2.9.0",
+    "@types/node": "^26.4.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "tailwindcss": "^4.3.1",
+    "typescript": "~5.9.0",
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0",
+    "vue-tsc": "^3.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

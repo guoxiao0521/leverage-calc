@@ -1,0 +1,33 @@
+[package]
+name = "leverage-calc"
+version = "0.1.0"
+description = "美股正股 ↔ 杠杆 ETP 价位换算工具"
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "leverage_calc_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-store = "2"
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "gzip"] }
+tokio = { version = "1", features = ["macros"] }
+chrono = "0.4"
+
+# 只给 examples/probe.rs 用，不进打包
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
