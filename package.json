@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "typecheck": "vue-tsc --noEmit",
     "tauri": "tauri",
-    "tauri:dev": "tauri dev"
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
   },
   "dependencies": {
     "@lucide/vue": "^1.18.0",
